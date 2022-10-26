@@ -1,7 +1,10 @@
 package com.example.sqlwithapi;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Base64;
 
 public class Mask implements Parcelable {
     private int ID;
@@ -33,6 +36,14 @@ public class Mask implements Parcelable {
         }
     };
 
+    public String getAirlineName(){return AirlineName;}
+    public String getAirlineWebSite(){return AirlineWebSite;}
+    public String getImage(){return Image;}
+
+    public Bitmap getAirlineImage(String encodedImg){
+        byte[] bytes = Base64.decode(encodedImg,Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -45,4 +56,5 @@ public class Mask implements Parcelable {
         parcel.writeString(AirlineWebSite);
         parcel.writeString(Image);
     }
+    public int getID() {return ID;}
 }
